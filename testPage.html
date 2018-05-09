@@ -5,6 +5,20 @@
 </head>
 <body onmousemove="moveLogo()">
     <script>
+
+        window.addEventListener("keypress", function(event) {
+
+            //A key
+            if (event.keyCode === 97) {
+                changeSize(2);
+                return;
+            //D key
+            } if(event.keyCode === 100) {
+                changeSize(-2);
+                return;
+            }
+        });
+
         function boom() {
             window.document.F1.T1.value = "Hello my Friends";
             window.document.F1.B1.value = "thing";
@@ -52,7 +66,6 @@
         }
 
         function moveLogo() {
-            console.log("Thing")
             let el = document.getElementById("logo");
             let size = parseInt(el.style.fontSize);
             //size = size.substring(0, (size.length -2));
@@ -71,6 +84,13 @@
             }*/
             //random colours, because
             //el.style.color = getRandomColor();
+        }
+
+        function changeSize(ammount) {
+            let el = document.getElementById("logo");
+            let size = parseInt(el.style.fontSize);
+            console.log(size + ammount)
+            el.style.fontSize = size + ammount;
         }
 
         function changeColor(colour) {
