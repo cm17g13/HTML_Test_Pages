@@ -2,12 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body onmousemove="moveLogo()">
     <script>
 
         window.addEventListener("keypress", function(event) {
-
             //A key
             if (event.keyCode === 97) {
                 changeSize(2);
@@ -69,8 +69,8 @@
             let el = document.getElementById("logo");
             let size = parseInt(el.style.fontSize);
             //size = size.substring(0, (size.length -2));
-            el.style.top = window.event.clientY;
-            el.style.left = window.event.clientX;
+            el.style.top = 4 + window.event.clientY;
+            el.style.left = 4 + window.event.clientX;
 
 
             //increases size depending on the height from the top
@@ -83,7 +83,9 @@
                 el.style.fontSize = 14;
             }*/
             //random colours, because
-            //el.style.color = getRandomColor();
+            if(el.innerHTML == "Random"){
+                el.style.color = getRandomColor();
+            }
         }
 
         function changeSize(ammount) {
@@ -91,6 +93,17 @@
             let size = parseInt(el.style.fontSize);
             console.log(size + ammount)
             el.style.fontSize = size + ammount;
+        }
+
+        function changeText(el) {
+
+            if(event.key === 'Enter') {
+                if(el.value != "") {
+                    document.getElementById("logo").innerHTML = el.value;
+                    el.blur();
+                }
+            }
+
         }
 
         function changeColor(colour) {
@@ -113,6 +126,7 @@
         Hello box: <input type="text" id="T1" name="T1">
         <input type="button" value="Hello" name="B1" onclick="boom()">
     </form>
+    
     <form id = "F2" name="F2">
         Number 1: <input type="text" name="T2"><br>
         Number 2: <input type="text" name="T3"><br>
@@ -120,12 +134,24 @@
         <input type="button" value="Calculate"  name="B2" onclick="add()">
         <input type="button" value="Empty?"  name="B3" onclick="isEmpty()">
     </form>
-    <span id="logo" style="position: absolute; top: 50%; left: 50%; font-size: 14px"> This is the logo </span>
+
+    <input id="textChanger" type="text" style="width: 300px" placeholder="put text in me and press enter" onkeydown="changeText(this)"/><br>
+    <span id="logo" disabled style="position: absolute; top: 50%; left: 50%; font-size: 14px"> This is the logo </span>
+
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>
+
     <div id="colourPannel">
-        <div style="width:100px;height:100px;border:1px solid #000;background-color: red; position: absolute; top: 200px; left: 0px" onmouseenter="changeColor('red');" onmouseleave="changeColor('black');">Red</div>
-        <div style="width:100px;height:100px;border:1px solid #000;background-color: green; position: absolute; top: 200px; left: 500px" onmouseenter="changeColor('green');" onmouseleave="changeColor('black');">Green</div>
-        <div style="width:100px;height:100px;border:1px solid #000;background-color: blue; position: absolute; top: 500px; left: 0px" onmouseenter="changeColor('blue');" onmouseleave="changeColor('black');">Blue</div>
-        <div style="width:100px;height:100px;border:1px solid #000;background-color: yellow; position: absolute; top: 500px; left: 500px" onmouseenter="changeColor('yellow');" onmouseleave="changeColor('black');">Yellow</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: red; position: absolute; top: 50%; left: 0%" onmouseenter="changeColor('red');" onmouseleave="changeColor('black');">Red</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: green; position: absolute; top: 50%; right: 0%" onmouseenter="changeColor('green');" onmouseleave="changeColor('black');">Green</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: blue; position: absolute; bottom: 0%; left: 0%" onmouseenter="changeColor('blue');" onmouseleave="changeColor('black');">Blue</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: yellow; position: absolute; bottom: 0%; right: 0%" onmouseenter="changeColor('yellow');" onmouseleave="changeColor('black');">Yellow</div>
     </div>
 </body>
 </html>
