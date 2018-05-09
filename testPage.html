@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body onmousemove="moveLogo()">
+    <script>
+        function boom() {
+            window.document.F1.T1.value = "Hello my Friends";
+            window.document.F1.B1.value = "thing";
+        }
+
+        function add() {
+            let form2 = document.getElementById("F2");
+            let text2 = form2.T2;
+            let text3 = form2.T3;
+            if(text2.value=="" && text3.value=="") {
+                window.alert("You dun messed up");
+                text2.value = 89;
+                text3.value = 133;
+                add();
+            } else {
+                if (text2.value == "") {
+                    window.alert("The first number is missing");
+                    text2.focus();
+                } else if (text3.value == "") {
+                    window.alert("The second number is missing");
+                    text3.focus();
+                }
+            }
+
+            let num1 = parseInt(text2.value);
+            let num2 = parseInt(text3.value);
+            form2.T4.value = num1 + num2;
+        }
+
+        function isEmpty() {
+            let forms = window.document.forms;
+            for(let i = 0; i < forms.length; i++) {
+
+                let elements = forms[i].elements;
+                for (let j = 0; j < elements.length; j++) {
+
+                    let element = elements[j];
+                    if (element.value == "" && element.type=="text"
+                    ) {
+                        element.focus();
+                        return;
+                    }
+                }
+            }
+        }
+
+        function moveLogo() {
+            console.log("Thing")
+            let el = document.getElementById("logo");
+            let size = parseInt(el.style.fontSize);
+            //size = size.substring(0, (size.length -2));
+            el.style.top = window.event.clientY;
+            el.style.left = window.event.clientX;
+
+
+            //increases size depending on the height from the top
+            // el.style.fontSize = (200 * window.event.clientY)/window.screen.height;
+
+            //increases size and resets.
+            /*if(size < 500) {
+                el.style.fontSize = +size + 2;
+            } else {
+                el.style.fontSize = 14;
+            }*/
+            //random colours, because
+            //el.style.color = getRandomColor();
+        }
+
+        function changeColor(colour) {
+            document.getElementById("logo").style.color = colour;
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+    </script>
+    <form id="F1" name="F1">
+        <input type="button">
+        <input type="button">
+        Hello box: <input type="text" id="T1" name="T1">
+        <input type="button" value="Hello" name="B1" onclick="boom()">
+    </form>
+    <form id = "F2" name="F2">
+        Number 1: <input type="text" name="T2"><br>
+        Number 2: <input type="text" name="T3"><br>
+        Result : <input type="text" id="T4" name="T4">
+        <input type="button" value="Calculate"  name="B2" onclick="add()">
+        <input type="button" value="Empty?"  name="B3" onclick="isEmpty()">
+    </form>
+    <span id="logo" style="position: absolute; top: 50%; left: 50%; font-size: 14px"> This is the logo </span>
+    <div id="colourPannel">
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: red; position: absolute; top: 200px; left: 0px" onmouseenter="changeColor('red');" onmouseleave="changeColor('black');">Red</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: green; position: absolute; top: 200px; left: 500px" onmouseenter="changeColor('green');" onmouseleave="changeColor('black');">Green</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: blue; position: absolute; top: 500px; left: 0px" onmouseenter="changeColor('blue');" onmouseleave="changeColor('black');">Blue</div>
+        <div style="width:100px;height:100px;border:1px solid #000;background-color: yellow; position: absolute; top: 500px; left: 500px" onmouseenter="changeColor('yellow');" onmouseleave="changeColor('black');">Yellow</div>
+    </div>
+</body>
+</html>
