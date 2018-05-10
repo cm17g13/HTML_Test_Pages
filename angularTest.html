@@ -6,14 +6,53 @@
         <script src="angular.js"></script>
         <script>
             var mod = angular.module("app", []);
-            mod.controller("cont", function ($scope) {
-               $scope.name = "The Shafeeq";
-            });
+            var f = function ($scope) {
+                $scope.name = "The Shafeeq";
+                $scope.regNu = "S1";
+                $scope.address = "London";
+                $scope.hello = function() {
+                    return "Hello my friends";
+                }
+                $scope.addFun = function(num1, num2) {
+                    return num1 + num2;
+                }
+                $scope.records =    [{regNu:21, name:"Peter", marks:67},
+                                    {regNu:4567, name:"Baker", marks:92},
+                                    {regNu:46, name:"Tib", marks:104},
+                                    {regNu:25, name:"Old-Hayden", marks:45}]
+            };
+
+            mod.controller("controller", f);
         </script>
     </head>
-    <body ng-controller="cont">
+    <body ng-controller="controller">
         Ello Ma Friends <br>
         My name is {{name}}    <br>
         This is 4 + 5 = {{4+5}}     <br>
+        Registration Number: {{regNu}}  <br>
+        Location : {{address}}  <br>
+        {{hello()}} <br>
+        {{addFun(2, 3)}} <br>
+        <input type="text" ng-model="name">
+        <input type="text" ng-model="name">
+        <table>
+            <tr>
+                <td style="text-align: center"> Registration <br> Number </td>
+                <td style="text-align: center"> Name </td>
+                <td style="text-align: center"> Marks </td>
+                <td style="text-align: center"> Percent </td>
+                <td style="text-align: center"> Result </td>
+            </tr>
+            <tr ng-repeat="rec in records | orderBy:'-marks'">
+                <td style="text-align: center"> {{rec.regNu}}</td>
+                <td style="text-align: center"> {{rec.name}}</td>
+                <td style="text-align: center"> {{rec.marks}}</td>
+                <td style="text-align: center" > {{(rec.marks*100)/150 | number : 2}}</td>
+                <td style="text-align: center">
+                    <B ng-if="(rec.marks*100)/150 >=60"> Pass </B>
+                    <b ng-if="(rec.marks*100)/150 < 60"> Fail </b>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
