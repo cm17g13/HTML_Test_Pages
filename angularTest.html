@@ -1,0 +1,19 @@
+
+<html ng-app="app">
+    <head>
+        <meta charset="UTF-8">
+        <title>Angular JS Test</title>
+        <script src="angular.js"></script>
+        <script>
+            var mod = angular.module("app", []);
+            mod.controller("cont", function ($scope) {
+               $scope.name = "The Shafeeq";
+            });
+        </script>
+    </head>
+    <body ng-controller="cont">
+        Ello Ma Friends <br>
+        My name is {{name}}    <br>
+        This is 4 + 5 = {{4+5}}     <br>
+    </body>
+</html>

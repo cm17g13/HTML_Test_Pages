@@ -83,7 +83,7 @@
                 el.style.fontSize = 14;
             }*/
             //random colours, because
-            if(el.innerHTML == "Random"){
+            if(el.innerHTML.toLowerCase() == "random"){
                 el.style.color = getRandomColor();
             }
         }
@@ -91,7 +91,6 @@
         function changeSize(ammount) {
             let el = document.getElementById("logo");
             let size = parseInt(el.style.fontSize);
-            console.log(size + ammount)
             el.style.fontSize = size + ammount;
         }
 
@@ -103,7 +102,6 @@
                     el.blur();
                 }
             }
-
         }
 
         function changeColor(colour) {
@@ -119,6 +117,56 @@
             return color;
         }
 
+        function showBox(panel) {
+            panel.children[0].style.backgroundColor = "2C3DD4";
+            panel.children[1].style.display = "block";
+        }
+
+        function hideBox(panel) {
+            panel.children[0].style.backgroundColor = "1a9bd4";
+            panel.children[1].style.display = "none";
+        }
+
+        function selectPanel(panel) {
+            panel.style.backgroundColor = "1a9bd4";
+            //panel.style.cursor = "url('http://www.rw-designer.com/cursor-view/41356.png'), auto";
+        }
+
+        function deselectPanel(panel) {
+            panel.style.backgroundColor = "f1f1f1";
+        }
+
+        function checkInput(inputs) {
+            let field1 = inputs.elements[0];
+            let field2 = inputs.elements[1];
+
+            if(!field1.value && !field2.value) {
+                field1.placeholder = "you did not submit a first number"
+                field2.placeholder = "you did not submit a second number"
+                field1.style.backgroundColor = "Red";
+                field2.style.backgroundColor = "Red";
+                return false;
+            }
+
+            if(!field1.value) {
+                field1.placeholder = "you did not submit a first number"
+                field1.style.backgroundColor = "Red";
+                return false;
+            }
+            if(!field2.value) {
+                field2.placeholder = "you did not submit a second number"
+                field2.style.backgroundColor = "Red";
+                return false;
+            }
+        }
+
+        function resetBackground(el) {
+            if(el.value == "") {
+                el.style.backgroundColor = "White";
+                el.placeholder = "";
+            }
+        }
+
     </script>
     <form id="F1" name="F1">
         <input type="button">
@@ -126,24 +174,36 @@
         Hello box: <input type="text" id="T1" name="T1">
         <input type="button" value="Hello" name="B1" onclick="boom()">
     </form>
-    
-    <form id = "F2" name="F2">
-        Number 1: <input type="text" name="T2"><br>
-        Number 2: <input type="text" name="T3"><br>
+
+    <form id = "F2" name="F2" action="testOutput.html" onsubmit="return checkInput(this)">
+        Number 1: <input type="text" name="T2" onfocus="resetBackground(this);"><br>
+        Number 2: <input type="text" name="T3" onfocus="resetBackground(this);"><br>
         Result : <input type="text" id="T4" name="T4">
         <input type="button" value="Calculate"  name="B2" onclick="add()">
         <input type="button" value="Empty?"  name="B3" onclick="isEmpty()">
+        <input type="submit">
     </form>
 
     <input id="textChanger" type="text" style="width: 300px" placeholder="put text in me and press enter" onkeydown="changeText(this)"/><br>
     <span id="logo" disabled style="position: absolute; top: 50%; left: 50%; font-size: 14px"> This is the logo </span>
-
-    <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-        <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+    <br>
+    <div name="comboBoxs">
+        <div id="Contries" class="dropdown" onmouseenter="showBox(this)" onmouseleave="hideBox(this);">
+            <span class="dropbtn">Contries</span>
+            <div class="dropdown-content" >
+                <a href="https://en.wikipedia.org/wiki/United_Kingdom" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/49730.png'), auto">UK</a>
+                <a href="https://en.wikipedia.org/wiki/United_States" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/41356.png'), auto">USA</a>
+                <a href="https://en.wikipedia.org/wiki/India" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/41360.png'), auto">India</a>
+                <a href="https://en.wikipedia.org/wiki/South_Africa" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/35833.gif'), auto">South Africa</a>
+            </div>
+        </div>
+        <div id="Sports" class="dropdown" onmouseenter="showBox(this);" onmouseleave="hideBox(this);">
+            <span class="dropbtn">Sports</span>
+            <div class="dropdown-content" >
+                <a href="https://en.wikipedia.org/wiki/Football" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/66799.gif'), auto">Football</a>
+                <a href="https://en.wikipedia.org/wiki/Cricket" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/64737-48.gif'), auto">Cricket</a>
+                <a href="https://en.wikipedia.org/wiki/Table_tennis" onmouseover="selectPanel(this);" onmouseleave="deselectPanel(this);" style="cursor: url('http://www.rw-designer.com/cursor-view/3882.gif'), auto">Table Tennis</a>
+            </div>
         </div>
     </div>
 
