@@ -6,7 +6,7 @@
         <script src="angular.js"></script>
         <script>
             var mod = angular.module("app", []);
-            var f = function ($scope) {
+            var controllerData = function ($scope) {
                 $scope.name = "The Shafeeq";
                 $scope.regNu = "S1";
                 $scope.address = "London";
@@ -20,9 +20,22 @@
                                     {regNu:4567, name:"Baker", marks:92},
                                     {regNu:46, name:"Tib", marks:104},
                                     {regNu:25, name:"Old-Hayden", marks:45}]
+                                    
+                $scope.data =   [{subject:"Java", likes:0, dislikes:0},
+                                {subject:"JS", likes:0, dislikes:0},
+                                {subject:"HTML", likes:0, dislikes:0},
+                                {subject:"PHP", likes:0, dislikes:0}]
+                $scope.like = function(record) {
+                    record.likes++;
+                }
+
+                $scope.dislike = function(record) {
+                    record.dislikes++;
+                }
+
             };
 
-            mod.controller("controller", f);
+            mod.controller("controller", controllerData);
         </script>
     </head>
     <body ng-controller="controller">
@@ -51,6 +64,29 @@
                 <td style="text-align: center">
                     <B ng-if="(rec.marks*100)/150 >=60"> Pass </B>
                     <b ng-if="(rec.marks*100)/150 < 60"> Fail </b>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td style="text-align: center"> Subject </td>
+                <td style="text-align: center"> Likes </td>
+                <td style="text-align: center"> Dislikes </td>
+                <td style="text-align: center"> Result </td>
+            </tr>
+            <tr ng-repeat="d in data | orderBy:'Subject'">
+                <td style="text-align: center"> {{d.subject}}</td>
+                <td style="text-align: center"> {{d.likes}}</td>
+                <td style="text-align: center"> {{d.dislikes}}</td>
+                <td style="text-align: center">
+                    <b ng-if="d.likes == d.dislikes"> Even Number </b>
+                    <b ng-if="d.likes > d.dislikes"> More Likes </b>
+                    <b ng-if="d.likes < d.dislikes"> More Dislikes </b>
+                </td>
+                <td style="text-align: center">
+                    <input type="button" value="Like" ng-click="like(d)">
+                    <input type="button" value="Dislike" ng-click="dislike(d)">
                 </td>
             </tr>
         </table>
