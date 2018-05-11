@@ -1,0 +1,27 @@
+<table ng-controller="controller">
+    <tr>
+        <td> </td>
+        <td> <input ng-model="search.id"></label></td>
+        <td> <input ng-model="search.product"></label></td>
+        <td> <input ng-model="search.quantity"></label></td>
+        <td> </td>
+        <td> <input ng-model="search.price"></label></td>
+
+    </tr>
+    <tr>
+        <td style="text-align: center"> S.No </td>
+        <td style="text-align: center" ng-click="click('id')"> ID </td>
+        <td style="text-align: center" ng-click="click('product')"> Product  </td>
+        <td style="text-align: center" ng-click="click('quantity')"> Quantity </td>
+        <td style="text-align: center"> Status </td>
+        <td style="text-align: center" ng-click="click('price')"> Price </td>
+    </tr>
+    <tr ng-repeat="d in data | filter:search:exact | orderBy:field:order">
+        <td style="text-align: center"> {{$index}}</td>
+        <td style="text-align: center"> {{d.id}}</td>
+        <td style="text-align: center"> {{d.product}}</td>
+        <td style="text-align: center"> {{d.quantity}}</td>
+        <td style="text-align: center"> {{d.quantity | quantityFilter}}</td>
+        <td style="text-align: center"> {{d.price}}</td>
+    </tr>
+</table>

@@ -16,6 +16,7 @@
             $scope.field = "product";
             $scope.order = true;
             $scope.click = function(heading) {
+            $scope.inputFile = "includeTest.html";
             console.log(heading);
                 if(heading == this.field) {
                     this.order = !this.order;
@@ -71,5 +72,6 @@
             <td style="text-align: center"> {{d.price}}</td>
         </tr>
     </table>
+    <div ng-include="inputFile"></div>
 </body>
 </html>

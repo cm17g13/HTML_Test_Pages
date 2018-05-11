@@ -1,0 +1,26 @@
+<
+<html ng-app="app">
+    <script src="angular.js"></script>
+    <script>
+        var module = angular.module("app", []);
+        var controllerData = function ($scope, $http) {
+            var A = $http({
+                        method:"GET",
+                        url: "https://jsonplaceholder.typicode.com/posts/1"
+                })
+            A.then(function(response) {
+                $scope.records = response.data;
+                })
+        }
+
+        module.controller("controller", controllerData);
+    </script>
+<body ng-controller="controller">
+    <div>
+        User ID : {{records.userId}} <br>
+        ID : {{records.id}} <br>
+        Title : {{records.title}} <br>
+        Body : {{records.body}} <br>
+    </div>
+</body>
+</html>
